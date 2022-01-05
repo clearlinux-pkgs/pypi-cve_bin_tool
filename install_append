@@ -1,0 +1,3 @@
+# We cannot ship this content unless it is distributed under cve_bin_tool
+# site-packages...  or else conflicts may occur with other packages.
+rm -rf %{buildroot}/usr/lib/python3*/site-packages/test

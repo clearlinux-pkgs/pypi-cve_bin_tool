@@ -4,7 +4,7 @@
 #
 Name     : pypi-cve_bin_tool
 Version  : 3.0
-Release  : 41
+Release  : 42
 URL      : https://files.pythonhosted.org/packages/75/27/178425bba146461fd6221afc31b5837e2707f9ceeb2b04654e521f8fc5cb/cve-bin-tool-3.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/75/27/178425bba146461fd6221afc31b5837e2707f9ceeb2b04654e521f8fc5cb/cve-bin-tool-3.0.tar.gz
 Summary  : CVE Binary Checker Tool
@@ -15,12 +15,9 @@ Requires: pypi-cve_bin_tool-license = %{version}-%{release}
 Requires: pypi-cve_bin_tool-python = %{version}-%{release}
 Requires: pypi-cve_bin_tool-python3 = %{version}-%{release}
 Requires: aiodns
-Requires: brotlipy
-Requires: chardet
+Requires: pypi(brotlipy)
+Requires: pypi(chardet)
 BuildRequires : buildreq-distutils3
-Provides: cve-bin-tool
-Provides: cve-bin-tool-python
-Provides: cve-bin-tool-python3
 BuildRequires : pypi(beautifulsoup4)
 BuildRequires : pypi(jinja2)
 BuildRequires : pypi(plotly)
@@ -102,7 +99,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641426469
+export SOURCE_DATE_EPOCH=1641846038
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib

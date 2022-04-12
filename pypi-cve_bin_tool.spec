@@ -4,7 +4,7 @@
 #
 Name     : pypi-cve_bin_tool
 Version  : 3.0
-Release  : 43
+Release  : 44
 URL      : https://files.pythonhosted.org/packages/75/27/178425bba146461fd6221afc31b5837e2707f9ceeb2b04654e521f8fc5cb/cve-bin-tool-3.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/75/27/178425bba146461fd6221afc31b5837e2707f9ceeb2b04654e521f8fc5cb/cve-bin-tool-3.0.tar.gz
 Summary  : CVE Binary Checker Tool
@@ -99,7 +99,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1649708158
+export SOURCE_DATE_EPOCH=1649733360
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib

@@ -1,5 +1,5 @@
 PKG_NAME := pypi-cve_bin_tool
-URL = https://files.pythonhosted.org/packages/75/27/178425bba146461fd6221afc31b5837e2707f9ceeb2b04654e521f8fc5cb/cve-bin-tool-3.0.tar.gz
+URL = https://files.pythonhosted.org/packages/48/8d/1fe67ad0f3559ee266aad68774fa7315be9eb65e2acc095034895ca57ae2/cve-bin-tool-3.1.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

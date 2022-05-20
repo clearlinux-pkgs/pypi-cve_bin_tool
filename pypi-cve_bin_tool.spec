@@ -4,7 +4,7 @@
 #
 Name     : pypi-cve_bin_tool
 Version  : 3.1.1
-Release  : 46
+Release  : 47
 URL      : https://files.pythonhosted.org/packages/a7/6c/37757de1d68bb4076305b3d5407d36cc44680bb9232907d8a47b7a5a3327/cve-bin-tool-3.1.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/a7/6c/37757de1d68bb4076305b3d5407d36cc44680bb9232907d8a47b7a5a3327/cve-bin-tool-3.1.1.tar.gz
 Summary  : CVE Binary Checker Tool
@@ -96,13 +96,16 @@ python3 components for the pypi-cve_bin_tool package.
 %prep
 %setup -q -n cve-bin-tool-3.1.1
 cd %{_builddir}/cve-bin-tool-3.1.1
+pushd ..
+cp -a cve-bin-tool-3.1.1 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1650553073
+export SOURCE_DATE_EPOCH=1653055087
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -114,6 +117,15 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 setup.py build
+
+popd
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
@@ -123,11 +135,20 @@ python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 -tt setup.py build install --root=%{buildroot}-v3
+popd
 ## install_append content
 # We cannot ship this content unless it is distributed under cve_bin_tool
 # site-packages...  or else conflicts may occur with other packages.
 rm -rf %{buildroot}/usr/lib/python3*/site-packages/test
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)

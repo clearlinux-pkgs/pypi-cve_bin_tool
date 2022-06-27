@@ -4,7 +4,7 @@
 #
 Name     : pypi-cve_bin_tool
 Version  : 3.1.1
-Release  : 47
+Release  : 48
 URL      : https://files.pythonhosted.org/packages/a7/6c/37757de1d68bb4076305b3d5407d36cc44680bb9232907d8a47b7a5a3327/cve-bin-tool-3.1.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/a7/6c/37757de1d68bb4076305b3d5407d36cc44680bb9232907d8a47b7a5a3327/cve-bin-tool-3.1.1.tar.gz
 Summary  : CVE Binary Checker Tool
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1653055087
+export SOURCE_DATE_EPOCH=1656372654
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -148,7 +148,7 @@ popd
 # site-packages...  or else conflicts may occur with other packages.
 rm -rf %{buildroot}/usr/lib/python3*/site-packages/test
 ## install_append end
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)

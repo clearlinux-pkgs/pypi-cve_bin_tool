@@ -4,7 +4,7 @@
 #
 Name     : pypi-cve_bin_tool
 Version  : 3.1.2
-Release  : 55
+Release  : 56
 URL      : https://files.pythonhosted.org/packages/87/ad/01c1e343080194fb19a9d94740ad1c48a5394b8d8928062dbd1192b9f458/cve-bin-tool-3.1.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/87/ad/01c1e343080194fb19a9d94740ad1c48a5394b8d8928062dbd1192b9f458/cve-bin-tool-3.1.2.tar.gz
 Summary  : CVE Binary Checker Tool
@@ -106,7 +106,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1670880266
+export SOURCE_DATE_EPOCH=1670942396
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -116,6 +116,7 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
+pypi-dep-fix.py . packaging
 python3 setup.py build
 
 pushd ../buildavx2/
@@ -124,6 +125,7 @@ export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+pypi-dep-fix.py . packaging
 python3 setup.py build
 
 popd
@@ -133,6 +135,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-cve_bin_tool
 cp %{_builddir}/cve-bin-tool-%{version}/LICENSE.md %{buildroot}/usr/share/package-licenses/pypi-cve_bin_tool/a9575dd4ea2e4ba493b8565704699133ef8bc8f9 || :
 python3 -tt setup.py build  install --root=%{buildroot}
+pypi-dep-fix.py %{buildroot} packaging
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
